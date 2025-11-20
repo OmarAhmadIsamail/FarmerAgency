@@ -261,7 +261,7 @@ class OwnerProductManager {
             await this.saveOwnerProduct(newProduct);
             alert('Product submitted successfully! It will be reviewed by admin before appearing on the site.');
             
-            // Refresh dashboard data
+            // Refresh dashboard data - FIXED: Safe method call
             this.refreshDashboard();
             
             // Redirect to products page
@@ -622,10 +622,43 @@ class OwnerProductManager {
         }
     }
 
-    // Refresh dashboard data
+    // Refresh dashboard data - FIXED VERSION
     refreshDashboard() {
-        if (window.ownerDashboard) {
-            window.ownerDashboard.refreshDashboardData();
+        console.log('Refreshing dashboard data...');
+        
+        try {
+            // Always update local data first
+            this.updateProductStats().catch(err => {
+                console.warn('Failed to update product stats:', err);
+            });
+            
+            this.loadOwnerProducts().catch(err => {
+                console.warn('Failed to load owner products:', err);
+            });
+            
+            // Try to refresh dashboard if it exists - with safe check
+            if (window.ownerDashboard) {
+                if (typeof window.ownerDashboard.refreshDashboardData === 'function') {
+                    window.ownerDashboard.refreshDashboardData();
+                    console.log('Dashboard refreshed successfully');
+                } else {
+                    console.warn('ownerDashboard exists but refreshDashboardData is not a function');
+                    
+                    // Try alternative method names that might exist
+                    if (typeof window.ownerDashboard.refreshData === 'function') {
+                        window.ownerDashboard.refreshData();
+                    } else if (typeof window.ownerDashboard.updateData === 'function') {
+                        window.ownerDashboard.updateData();
+                    } else if (typeof window.ownerDashboard.loadData === 'function') {
+                        window.ownerDashboard.loadData();
+                    }
+                }
+            } else {
+                console.log('ownerDashboard not found, using local refresh only');
+            }
+        } catch (error) {
+            console.error('Error in refreshDashboard:', error);
+            // Don't break the flow for dashboard refresh errors
         }
     }
 
