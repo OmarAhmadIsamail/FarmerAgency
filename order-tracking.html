@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Order Tracking - FarmerAgency</title>
+  <meta name="description" content="Track your FarmerAgency orders">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  
+  <!-- Order Tracking CSS -->
+  <style>
+    .tracking-header {
+      background: linear-gradient(135deg, var(--accent-color), #1e9c50);
+      color: white;
+      padding: 2rem 0;
+      margin-bottom: 2rem;
+    }
+    
+    .order-card {
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    
+    .order-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .order-card-header {
+      background-color: var(--surface-color);
+      padding: 1.5rem;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .order-card-body {
+      padding: 1.5rem;
+    }
+    
+    .order-status {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 50px;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    
+    .status-confirmed {
+      background-color: #e7f4ff;
+      color: #0066cc;
+    }
+    
+    .status-processing {
+      background-color: #fff4e6;
+      color: #cc6600;
+    }
+    
+    .status-shipped {
+      background-color: #e6f7ff;
+      color: #0066cc;
+    }
+    
+    .status-delivered {
+      background-color: #e6f7e6;
+      color: #008000;
+    }
+    
+    .status-cancelled {
+      background-color: #ffe6e6;
+      color: #cc0000;
+    }
+    
+    .tracking-timeline {
+      position: relative;
+      padding-left: 2rem;
+      margin: 2rem 0;
+    }
+    
+    .tracking-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0.5rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background-color: #e0e0e0;
+    }
+    
+    .timeline-step {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+    
+    .timeline-step:last-child {
+      margin-bottom: 0;
+    }
+    
+    .timeline-step::before {
+      content: '';
+      position: absolute;
+      left: -1.5rem;
+      top: 0.25rem;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      background-color: #e0e0e0;
+      z-index: 1;
+    }
+    
+    .timeline-step.active::before {
+      background-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(46, 202, 106, 0.2);
+    }
+    
+    .timeline-step.completed::before {
+      background-color: var(--accent-color);
+    }
+    
+    .order-item {
+      display: flex;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .order-item:last-child {
+      border-bottom: none;
+    }
+    
+    .order-item-img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-right: 1rem;
+    }
+    
+    .no-orders {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+    
+    .no-orders i {
+      font-size: 4rem;
+      color: #ddd;
+      margin-bottom: 1rem;
+    }
+    
+    .search-order {
+      background-color: var(--surface-color);
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+    
+    .delete-order-btn {
+      background: none;
+      border: none;
+      color: #dc3545;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    
+    .delete-order-btn:hover {
+      color: #c82333;
+    }
+    
+    .order-actions {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: flex-end;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+
+<body class="index-page">
+  
+  <!-- Header will be loaded here -->
+  <div id="header-container"></div>
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade">
+      <div class="heading">
+        <div class="container">
+          <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-8">
+              <h1>Order Tracking</h1>
+              <p class="mb-0">Track your orders and delivery status</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="breadcrumbs">
+        <div class="container">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li class="current">Order Tracking</li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <!-- Order Tracking Section -->
+    <section id="order-tracking" class="order-tracking section">
+      <div class="container" data-aos="fade-up">
+        
+        <!-- Search Order Form -->
+        <div class="search-order">
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <h3 class="text-center mb-4">Track Your Order</h3>
+              <div class="row">
+                <div class="col-md-8">
+                  <input type="text" id="order-search" class="form-control" placeholder="Enter your order ID (e.g. FA-123456)">
+                </div>
+                <div class="col-md-4">
+                  <button id="search-btn" class="btn btn-primary w-100">Track Order</button>
+                </div>
+              </div>
+              <p class="text-muted mt-2 text-center">You can find your order ID in your order confirmation email.</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Orders List -->
+        <div id="orders-container">
+          <!-- Orders will be loaded here dynamically -->
+        </div>
+        
+        <!-- No Orders Message -->
+        <div id="no-orders" class="no-orders" style="display: none;">
+          <i class="bi bi-box-seam"></i>
+          <h3>No Orders Found</h3>
+          <p class="text-muted">You haven't placed any orders yet, or we couldn't find orders matching your search.</p>
+          <a href="product.html" class="btn btn-primary mt-3">Start Shopping</a>
+        </div>
+        
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Order Details Modal -->
+  <div class="modal fade" id="orderDetailsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Order Details - <span id="modal-order-id"></span></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <h6>Order Information</h6>
+              <p><strong>Order Date:</strong> <span id="modal-order-date"></span></p>
+              <p><strong>Status:</strong> <span id="modal-order-status"></span></p>
+              <p><strong>Total Amount:</strong> <span id="modal-order-total"></span></p>
+            </div>
+            <div class="col-md-6">
+              <h6>Delivery Information</h6>
+              <p id="modal-delivery-address"></p>
+              <p><strong>Delivery Method:</strong> <span id="modal-delivery-method"></span></p>
+              <p><strong>Estimated Delivery:</strong> <span id="modal-estimated-delivery"></span></p>
+            </div>
+          </div>
+          
+          <hr>
+          
+          <h6>Order Items</h6>
+          <div id="modal-order-items">
+            <!-- Order items will be loaded here -->
+          </div>
+          
+          <div class="tracking-timeline mt-4" id="modal-tracking-timeline">
+            <!-- Tracking timeline will be loaded here -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" id="modal-delete-btn">
+            <i class="bi bi-trash me-1"></i>Delete Order
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal fade" id="deleteConfirmModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirm Delete</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete order <strong id="delete-order-id"></strong>? This action cannot be undone.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" id="confirm-delete-btn">Delete Order</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer will be loaded here -->
+  <div id="footer-container"></div>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+  
+  <!-- Order Tracking JS -->
+  <script>
+let currentOrderId = null;
+
+// Enhanced order tracking with auth
+document.addEventListener('DOMContentLoaded', function() {
+    // Check authentication first
+    checkAuthForOrderTracking();
+    
+    // Load header and footer
+    loadHeader();
+    loadFooter();
+    
+    // Load orders when page loads
+    loadOrders();
+    
+    // Setup event listeners
+    setupEventListeners();
+});
+
+// Check authentication for order tracking
+function checkAuthForOrderTracking() {
+    const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+    
+    if (!isLoggedIn) {
+        // Show guest access option
+        showGuestAccessModal();
+        return;
+    }
+}
+
+// Show guest access modal
+function showGuestAccessModal() {
+    const guestModal = `
+        <div class="modal fade" id="guestAccessModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Order Tracking</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <i class="bi bi-box-seam display-1 text-muted mb-3"></i>
+                            <h4>Track Your Order</h4>
+                            <p class="mb-4">Please log in to view your order history or enter your order ID to track a specific order.</p>
+                            
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100 mb-2" onclick="redirectToLogin()">
+                                        <i class="bi bi-person me-2"></i>Login to Account
+                                    </button>
+                                </div>
+                                <div class="col-12">
+                                    <div class="border-top pt-3">
+                                        <h6 class="text-muted mb-3">Or track as guest</h6>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="guest-order-id" placeholder="Enter Order ID (e.g., FA-1234567890)">
+                                            <button class="btn btn-outline-primary" onclick="trackGuestOrder()">
+                                                <i class="bi bi-search"></i>
+                                            </button>
+                                        </div>
+                                        <small class="text-muted">Find your order ID in your confirmation email</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Add modal to body if not exists
+    if (!document.getElementById('guestAccessModal')) {
+        document.body.insertAdjacentHTML('beforeend', guestModal);
+    }
+    
+    // Show modal
+    const modal = new bootstrap.Modal(document.getElementById('guestAccessModal'));
+    modal.show();
+}
+
+// Redirect to login
+function redirectToLogin() {
+    window.location.href = 'auth/login.html?redirect=order-tracking';
+}
+
+// Track guest order
+function trackGuestOrder() {
+    const orderId = document.getElementById('guest-order-id').value.trim();
+    
+    if (!orderId) {
+        alert('Please enter an order ID');
+        return;
+    }
+    
+    // Search for the order
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+    const order = orders.find(o => o.id === orderId);
+    
+    if (order) {
+        // Close modal and show order details
+        const modal = bootstrap.Modal.getInstance(document.getElementById('guestAccessModal'));
+        if (modal) modal.hide();
+        
+        showOrderDetails(orderId);
+    } else {
+        alert('Order not found. Please check your order ID and try again.');
+    }
+}
+
+// Enhanced loadOrders function to filter by user
+function loadOrders(searchTerm = '') {
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+    const ordersContainer = document.getElementById('orders-container');
+    const noOrders = document.getElementById('no-orders');
+    const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+    const userData = isLoggedIn ? JSON.parse(sessionStorage.getItem('userData')) : null;
+    
+    // Filter orders based on auth status
+    let filteredOrders = orders;
+    
+    if (isLoggedIn && userData) {
+        // Show orders for logged in user
+        filteredOrders = orders.filter(order => 
+            order.userId === userData.id || order.userEmail === userData.email
+        );
+    } else {
+        // For guests, they should only see orders via search
+        filteredOrders = [];
+    }
+    
+    // Apply search filter if provided
+    if (searchTerm) {
+        filteredOrders = filteredOrders.filter(order => 
+            order.id.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    }
+    
+    // Clear container
+    ordersContainer.innerHTML = '';
+    
+    if (filteredOrders.length === 0) {
+        noOrders.style.display = 'block';
+        
+        // Update no orders message based on auth status
+        if (isLoggedIn) {
+            noOrders.innerHTML = `
+                <div class="text-center py-5">
+                    <i class="bi bi-cart-x display-1 text-muted"></i>
+                    <h4 class="mt-3">No Orders Yet</h4>
+                    <p class="text-muted">You haven't placed any orders yet.</p>
+                    <a href="product.html" class="btn btn-primary">Start Shopping</a>
+                </div>
+            `;
+        } else {
+            noOrders.innerHTML = `
+                <div class="text-center py-5">
+                    <i class="bi bi-person display-1 text-muted"></i>
+                    <h4 class="mt-3">No Orders Found</h4>
+                    <p class="text-muted">Please log in to view your order history or use the search above to track a specific order.</p>
+                    <div class="d-flex gap-2 justify-content-center">
+                        <a href="auth/login.html?redirect=order-tracking" class="btn btn-primary">Login</a>
+                        <button class="btn btn-outline-primary" onclick="showGuestAccessModal()">Track Order</button>
+                    </div>
+                </div>
+            `;
+        }
+        return;
+    }
+    
+    noOrders.style.display = 'none';
+    
+    // Sort orders by date (newest first)
+    filteredOrders.sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    // Display orders
+    filteredOrders.forEach(order => {
+        const orderCard = createOrderCard(order);
+        ordersContainer.appendChild(orderCard);
+    });
+}
+
+// Load header component
+function loadHeader() {
+    fetch('components/header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-container').innerHTML = data;
+            // Initialize any header functionality
+            if (typeof initializeHeader === 'function') {
+                initializeHeader();
+            }
+        })
+        .catch(error => console.error('Error loading header:', error));
+}
+
+// Load footer component
+function loadFooter() {
+    fetch('components/footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer-container').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading footer:', error));
+}
+
+// Setup event listeners
+function setupEventListeners() {
+    // Search button
+    document.getElementById('search-btn').addEventListener('click', searchOrder);
+    
+    // Enter key in search field
+    document.getElementById('order-search').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            searchOrder();
+        }
+    });
+    
+    // Cancel order button in modal
+    document.getElementById('modal-delete-btn').addEventListener('click', function() {
+        showCancelConfirmation(currentOrderId);
+    });
+    
+    // Confirm cancel button
+    document.getElementById('confirm-delete-btn').addEventListener('click', cancelOrder);
+}
+
+// Create order card
+function createOrderCard(order) {
+    const orderDate = new Date(order.date);
+    const formattedDate = orderDate.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+    
+    const orderCard = document.createElement('div');
+    orderCard.className = 'order-card';
+    orderCard.innerHTML = `
+        <div class="order-card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="mb-1">Order #${order.id}</h5>
+                    <p class="mb-0 text-muted">Placed on ${formattedDate}</p>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="order-status status-${order.status}">${getStatusText(order.status)}</span>
+                    ${order.status !== 'delivered' && order.status !== 'cancelled' ? `
+                        <button class="delete-order-btn" data-order-id="${order.id}" title="Cancel Order">
+                            <i class="bi bi-x-circle"></i>
+                        </button>
+                    ` : ''}
+                </div>
+            </div>
+        </div>
+        <div class="order-card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-1"><strong>Total:</strong> $${order.totals.total.toFixed(2)}</p>
+                    <p class="mb-0"><strong>Items:</strong> ${order.items.length} product(s)</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <button class="btn btn-outline-primary view-order-btn" data-order-id="${order.id}">
+                        View Details
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Add event listener to view order button
+    orderCard.querySelector('.view-order-btn').addEventListener('click', function() {
+        showOrderDetails(order.id);
+    });
+    
+    // Add event listener to cancel button (only if order is not delivered or already cancelled)
+    const cancelBtn = orderCard.querySelector('.delete-order-btn');
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', function() {
+            showCancelConfirmation(order.id);
+        });
+    }
+    
+    return orderCard;
+}
+
+// Get status text
+function getStatusText(status) {
+    const statusMap = {
+        'pending': 'Pending',
+        'confirmed': 'Confirmed',
+        'processing': 'Processing',
+        'shipped': 'Shipped',
+        'delivered': 'Delivered',
+        'cancelled': 'Cancelled'
+    };
+    
+    return statusMap[status] || status;
+}
+
+// Show order details in modal
+function showOrderDetails(orderId) {
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+    const order = orders.find(o => o.id === orderId);
+    
+    if (!order) {
+        alert('Order not found');
+        return;
+    }
+    
+    currentOrderId = orderId;
+    
+    // Set modal content
+    document.getElementById('modal-order-id').textContent = order.id;
+    
+    const orderDate = new Date(order.date);
+    document.getElementById('modal-order-date').textContent = orderDate.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+    
+    document.getElementById('modal-order-status').innerHTML = `<span class="order-status status-${order.status}">${getStatusText(order.status)}</span>`;
+    document.getElementById('modal-order-total').textContent = `$${order.totals.total.toFixed(2)}`;
+    
+    // Delivery information
+    const delivery = order.delivery;
+    document.getElementById('modal-delivery-address').textContent = 
+        `${delivery.location.address}, ${delivery.location.city}, ${delivery.location.zipCode}, ${delivery.location.country}`;
+    
+    document.getElementById('modal-delivery-method').textContent = 
+        delivery.option === 'express' ? 'Express Delivery' : 'Standard Delivery';
+    
+    const estimatedDate = new Date(order.date);
+    estimatedDate.setDate(estimatedDate.getDate() + (delivery.option === 'express' ? 1 : 3));
+    document.getElementById('modal-estimated-delivery').textContent = 
+        estimatedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    
+    // Order items
+    const orderItemsContainer = document.getElementById('modal-order-items');
+    orderItemsContainer.innerHTML = '';
+    
+    order.items.forEach(item => {
+        const itemElement = document.createElement('div');
+        itemElement.className = 'order-item';
+        itemElement.innerHTML = `
+            <img src="${item.image || 'assets/img/placeholder.jpg'}" alt="${item.name}" class="order-item-img">
+            <div class="flex-grow-1">
+                <h6 class="mb-1">${item.name}</h6>
+                <p class="mb-0 text-muted">Quantity: ${item.quantity}</p>
+            </div>
+            <div class="text-end">
+                <p class="mb-0">$${(item.price * item.quantity).toFixed(2)}</p>
+            </div>
+        `;
+        orderItemsContainer.appendChild(itemElement);
+    });
+    
+    // Tracking timeline
+    const timelineContainer = document.getElementById('modal-tracking-timeline');
+    timelineContainer.innerHTML = createTrackingTimeline(order);
+    
+    // Show/hide cancel button based on order status
+    const cancelBtn = document.getElementById('modal-delete-btn');
+    if (order.status === 'delivered' || order.status === 'cancelled') {
+        cancelBtn.style.display = 'none';
+    } else {
+        cancelBtn.style.display = 'inline-block';
+        cancelBtn.innerHTML = '<i class="bi bi-x-circle me-1"></i>Cancel Order';
+        cancelBtn.className = 'btn btn-warning';
+    }
+    
+    // Show modal
+    const modal = new bootstrap.Modal(document.getElementById('orderDetailsModal'));
+    modal.show();
+}
+
+// Create tracking timeline
+function createTrackingTimeline(order) {
+    const orderDate = new Date(order.date);
+    const statusSteps = [
+        { 
+            status: 'pending', 
+            title: 'Order Placed', 
+            description: 'Your order has been received and is pending confirmation.',
+            date: orderDate
+        },
+        { 
+            status: 'confirmed', 
+            title: 'Order Confirmed', 
+            description: 'Your order has been confirmed and is being processed.',
+            date: new Date(orderDate.getTime() + 2 * 60 * 60 * 1000) // 2 hours later
+        },
+        { 
+            status: 'processing', 
+            title: 'Processing', 
+            description: 'Your order is being prepared for shipment.',
+            date: new Date(orderDate.getTime() + 4 * 60 * 60 * 1000) // 4 hours later
+        },
+        { 
+            status: 'shipped', 
+            title: 'Shipped', 
+            description: 'Your order has been shipped and is on its way.',
+            date: new Date(orderDate.getTime() + 24 * 60 * 60 * 1000) // 1 day later
+        },
+        { 
+            status: 'delivered', 
+            title: 'Delivered', 
+            description: 'Your order has been delivered successfully.',
+            date: new Date(orderDate.getTime() + (order.delivery.option === 'express' ? 24 : 72) * 60 * 60 * 1000)
+        }
+    ];
+    
+    let timelineHTML = '';
+    
+    statusSteps.forEach(step => {
+        const isCompleted = getStatusLevel(order.status) >= getStatusLevel(step.status);
+        const isActive = order.status === step.status;
+        
+        // Skip steps that haven't been reached yet
+        if (getStatusLevel(order.status) < getStatusLevel(step.status) && order.status !== 'cancelled') {
+            return;
+        }
+        
+        timelineHTML += `
+            <div class="timeline-step ${isCompleted ? 'completed' : ''} ${isActive ? 'active' : ''}">
+                <h6 class="mb-1">${step.title}</h6>
+                <p class="mb-1 small">${step.description}</p>
+                <p class="mb-0 text-muted small">${step.date.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                })}</p>
+            </div>
+        `;
+    });
+    
+    // Add cancelled status if order is cancelled
+    if (order.status === 'cancelled') {
+        timelineHTML += `
+            <div class="timeline-step active">
+                <h6 class="mb-1">Order Cancelled</h6>
+                <p class="mb-1 small">Your order has been cancelled.</p>
+                <p class="mb-0 text-muted small">${new Date().toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                })}</p>
+            </div>
+        `;
+    }
+    
+    return timelineHTML;
+}
+
+// Get status level for comparison
+function getStatusLevel(status) {
+    const statusLevels = {
+        'pending': 1,
+        'confirmed': 2,
+        'processing': 3,
+        'shipped': 4,
+        'delivered': 5,
+        'cancelled': 0
+    };
+    
+    return statusLevels[status] || 0;
+}
+
+// Search for specific order
+function searchOrder() {
+    const searchTerm = document.getElementById('order-search').value.trim();
+    loadOrders(searchTerm);
+}
+
+// Show cancel confirmation modal
+function showCancelConfirmation(orderId) {
+    document.getElementById('delete-order-id').textContent = orderId;
+    document.querySelector('#deleteConfirmModal .modal-body p').textContent = 
+        `Are you sure you want to cancel order ${orderId}? This action cannot be undone.`;
+    
+    const confirmBtn = document.getElementById('confirm-delete-btn');
+    confirmBtn.textContent = 'Cancel Order';
+    confirmBtn.className = 'btn btn-warning';
+    
+    currentOrderId = orderId;
+    
+    const modal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+    modal.show();
+    
+    // Close the order details modal if it's open
+    const orderDetailsModal = bootstrap.Modal.getInstance(document.getElementById('orderDetailsModal'));
+    if (orderDetailsModal) {
+        orderDetailsModal.hide();
+    }
+}
+
+// Cancel order (user-side) - Mark as cancelled instead of deleting
+function cancelOrder() {
+    if (!currentOrderId) return;
+    
+    const orders = JSON.parse(localStorage.getItem('orders')) || [];
+    const orderIndex = orders.findIndex(order => order.id === currentOrderId);
+    
+    if (orderIndex !== -1) {
+        // Mark order as cancelled instead of deleting it
+        orders[orderIndex].status = 'cancelled';
+        localStorage.setItem('orders', JSON.stringify(orders));
+        
+        // Close the confirmation modal
+        const modal = bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal'));
+        modal.hide();
+        
+        // Reload orders
+        loadOrders();
+        
+        // Show success message
+        showNotification('Order cancelled successfully', 'warning');
+    }
+}
+
+// Show notification
+function showNotification(message, type = 'info') {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+    notification.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+    notification.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Auto remove after 3 seconds
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+        }
+    }, 3000);
+}
+  </script>
+  <script src="assets/js/components.js"></script>
+
+</body>
+
+</html>

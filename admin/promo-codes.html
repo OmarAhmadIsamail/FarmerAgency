@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Promo Codes - Farm Admin</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Admin CSS -->
+  <link href="../assets/css/admin.css" rel="stylesheet">
+</head>
+
+<body class="admin-body">
+  
+  <!-- Sidebar -->
+  <nav class="admin-sidebar">
+    <div class="sidebar-brand">
+      <h4 class="mb-0">Farm Admin</h4>
+      <small class="text-muted">Dashboard</small>
+    </div>
+    
+    <ul class="sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">
+          <i class="bi bi-speedometer2"></i> Dashboard
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="products.html">
+          <i class="bi bi-box-seam"></i> Products
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="orders.html">
+          <i class="bi bi-cart-check"></i> Orders
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="promo-codes.html">
+          <i class="bi bi-tag"></i> Promo Codes
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="messages.html">
+          <i class="bi bi-envelope"></i> Messages
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="blog.html">
+          <i class="bi bi-journal-text"></i> Blog
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="comments.html">
+          <i class="bi bi-chat-dots"></i> Comments
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="add-blog.html">
+          <i class="bi bi-plus-square"></i> Add Blog Post
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../index.html">
+          <i class="bi bi-house"></i> Back to Site
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="admin-main">
+    <div class="admin-header">
+      <div class="d-flex justify-content-between align-items-center">
+        <h1 class="h3 mb-0">Promo Codes</h1>
+        <button class="btn btn-primary" onclick="promoManager.showCreateModal()">
+          <i class="bi bi-plus-circle me-2"></i>Create Promo Code
+        </button>
+      </div>
+    </div>
+
+    <!-- Promo Codes List -->
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="admin-card">
+          <div class="card-body">
+            <h5 class="card-title">Active Promo Codes</h5>
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Code</th>
+                    <th>Type</th>
+                    <th>Value</th>
+                    <th>Usage</th>
+                    <th>Status</th>
+                    <th>Expires</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="promo-codes-table">
+                  <!-- Promo codes will be loaded here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Create/Edit Promo Code Modal -->
+  <div class="edit-modal" id="promo-modal">
+    <div class="edit-modal-content" style="max-width: 600px;">
+      <div class="edit-modal-header">
+        <h4 class="mb-0" id="promo-modal-title">Create Promo Code</h4>
+        <button class="close-modal" onclick="promoManager.closeModal()">&times;</button>
+      </div>
+      <div class="edit-modal-body">
+        <form id="promo-form">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="promo-code" class="form-label">Promo Code *</label>
+                <input type="text" class="form-control" id="promo-code" required 
+                       placeholder="e.g., SUMMER25" maxlength="20">
+                <small class="form-text text-muted">Uppercase letters and numbers only</small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="promo-type" class="form-label">Discount Type *</label>
+                <select class="form-control" id="promo-type" required>
+                  <option value="percentage">Percentage</option>
+                  <option value="fixed">Fixed Amount</option>
+                  <option value="free_shipping">Free Shipping</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="promo-value" class="form-label">Discount Value *</label>
+                <input type="number" class="form-control" id="promo-value" 
+                       step="0.01" min="0" required>
+                <small class="form-text text-muted">Percentage (1-100) or fixed amount</small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="promo-min-order" class="form-label">Minimum Order</label>
+                <input type="number" class="form-control" id="promo-min-order" 
+                       step="0.01" min="0" placeholder="No minimum">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="promo-max-uses" class="form-label">Maximum Uses</label>
+                <input type="number" class="form-control" id="promo-max-uses" 
+                       min="0" placeholder="Unlimited">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="promo-status" class="form-label">Status</label>
+                <select class="form-control" id="promo-status">
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                  <option value="expired">Expired</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="promo-start-date" class="form-label">Start Date</label>
+                <input type="datetime-local" class="form-control" id="promo-start-date">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="promo-expiry-date" class="form-label">Expiry Date</label>
+                <input type="datetime-local" class="form-control" id="promo-expiry-date">
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="promo-description" class="form-label">Description</label>
+            <textarea class="form-control" id="promo-description" rows="3" 
+                      placeholder="Describe the promo code for internal use"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="edit-modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="promoManager.closeModal()">Cancel</button>
+        <button type="button" class="btn btn-primary" id="save-promo-btn" onclick="promoManager.savePromoCode()">
+          Create Promo Code
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vendor JS Files -->
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Admin JS -->
+  <script src="../assets/js/admin.js"></script>
+  <script src="../assets/js/admin-promo-codes.js"></script>
+</body>
+</html>

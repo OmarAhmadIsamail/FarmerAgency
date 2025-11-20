@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Farm Owner Sign Up - EstateAgency</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Owner Auth CSS -->
+  <link href="../assets/css/owner-auth.css" rel="stylesheet">
+</head>
+
+<body class="owner-auth-body">
+  <div class="owner-auth-container">
+    <div class="owner-auth-card">
+      <div class="owner-auth-header">
+        <h1>Become a Farm Owner</h1>
+        <p>Register your farm and start selling your products</p>
+      </div>
+
+      <div class="owner-auth-body-content">
+        <!-- Already have account message -->
+        <div class="alert alert-info d-flex align-items-center mb-4" id="existing-account-alert" style="display: none !important;">
+          <i class="bi bi-info-circle me-2"></i>
+          <div>
+            <strong>Already have an account?</strong>
+            <a href="owner-login.html" class="alert-link ms-1">Click here to login</a>
+          </div>
+        </div>
+
+        <!-- Step Progress -->
+        <div class="step-progress">
+          <div class="step-progress-bar" id="progress-bar" style="width: 0%"></div>
+          <div class="step active" data-step="1">
+            <div class="step-number">1</div>
+            <div class="step-label">Farm Info</div>
+          </div>
+          <div class="step" data-step="2">
+            <div class="step-number">2</div>
+            <div class="step-label">Owner Details</div>
+          </div>
+          <div class="step" data-step="3">
+            <div class="step-number">3</div>
+            <div class="step-label">Business Info</div>
+          </div>
+          <div class="step" data-step="4">
+            <div class="step-number">4</div>
+            <div class="step-label">Complete</div>
+          </div>
+        </div>
+
+        <!-- Step 1: Farm Information -->
+        <form class="step-form active" id="step-1">
+          <h4 class="mb-4">Farm Information</h4>
+          
+          <div class="form-group">
+            <label for="farm-name" class="form-label">Farm Name *</label>
+            <input type="text" class="form-control" id="farm-name" required placeholder="Enter your farm name">
+            <div class="form-text">This will be your public business name</div>
+          </div>
+
+          <div class="form-group">
+            <label for="farm-type" class="form-label">Farm Type *</label>
+            <select class="form-select" id="farm-type" required>
+              <option value="">Select farm type</option>
+              <option value="crop">Crop Farm</option>
+              <option value="livestock">Livestock Farm</option>
+              <option value="dairy">Dairy Farm</option>
+              <option value="poultry">Poultry Farm</option>
+              <option value="mixed">Mixed Farming</option>
+              <option value="organic">Organic Farm</option>
+              <option value="hydroponic">Hydroponic Farm</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="farm-location" class="form-label">Farm Location *</label>
+            <input type="text" class="form-control" id="farm-location" required placeholder="City, State, Country">
+          </div>
+
+          <div class="form-group">
+            <label for="farm-size" class="form-label">Farm Size (acres)</label>
+            <input type="number" class="form-control" id="farm-size" placeholder="Enter farm size in acres">
+          </div>
+
+          <div class="form-group">
+            <label for="farm-description" class="form-label">Farm Description</label>
+            <textarea class="form-control" id="farm-description" rows="3" placeholder="Describe your farm and what you specialize in"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="farm-avatar" class="form-label">Farm Logo/Avatar</label>
+            <input type="file" class="form-control" id="farm-avatar" accept="image/*">
+            <div class="form-text">Upload your farm logo or a representative image</div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-outline" disabled>Previous</button>
+            <button type="button" class="btn btn-primary" onclick="nextStep(2)">Next</button>
+          </div>
+        </form>
+
+        <!-- Step 2: Owner Details -->
+        <form class="step-form" id="step-2">
+          <h4 class="mb-4">Owner Details</h4>
+          
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="first-name" class="form-label">First Name *</label>
+                <input type="text" class="form-control" id="first-name" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="last-name" class="form-label">Last Name *</label>
+                <input type="text" class="form-control" id="last-name" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address *</label>
+            <input type="email" class="form-control" id="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="phone" class="form-label">Phone Number *</label>
+            <input type="tel" class="form-control" id="phone" required>
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="form-label">Password *</label>
+            <input type="password" class="form-control" id="password" required>
+            <div class="form-text">Minimum 8 characters with letters and numbers</div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirm-password" class="form-label">Confirm Password *</label>
+            <input type="password" class="form-control" id="confirm-password" required>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-outline" onclick="prevStep(1)">Previous</button>
+            <button type="button" class="btn btn-primary" onclick="nextStep(3)">Next</button>
+          </div>
+        </form>
+
+        <!-- Step 3: Business Information -->
+        <form class="step-form" id="step-3">
+          <h4 class="mb-4">Business Information</h4>
+          
+          <div class="form-group">
+            <label for="business-license" class="form-label">Business License Number</label>
+            <input type="text" class="form-control" id="business-license" placeholder="If applicable">
+          </div>
+
+          <div class="form-group">
+            <label for="tax-id" class="form-label">Tax ID Number</label>
+            <input type="text" class="form-control" id="tax-id" placeholder="If applicable">
+          </div>
+
+          <div class="form-group">
+            <label for="bank-account" class="form-label">Bank Account for Payments</label>
+            <input type="text" class="form-control" id="bank-account" placeholder="Account number">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Products You Plan to Sell</label>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="checkbox" id="product-fruits">
+                  <label class="form-check-label" for="product-fruits">Fruits</label>
+                </div>
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="checkbox" id="product-vegetables">
+                  <label class="form-check-label" for="product-vegetables">Vegetables</label>
+                </div>
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="checkbox" id="product-dairy">
+                  <label class="form-check-label" for="product-dairy">Dairy Products</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="checkbox" id="product-meat">
+                  <label class="form-check-label" for="product-meat">Meat Products</label>
+                </div>
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="checkbox" id="product-eggs">
+                  <label class="form-check-label" for="product-eggs">Eggs</label>
+                </div>
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="checkbox" id="product-other">
+                  <label class="form-check-label" for="product-other">Other</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="terms" required>
+            <label class="form-check-label" for="terms">
+              I agree to the <a href="#" class="text-primary">Terms of Service</a> and <a href="#" class="text-primary">Privacy Policy</a> *
+            </label>
+          </div>
+
+          <!-- Farm Preview -->
+          <div class="farm-preview" id="farm-preview">
+            <div class="farm-preview-header">
+              <img src="" alt="Farm Logo" class="farm-avatar-preview" id="farm-avatar-preview" style="display: none;">
+              <h5 class="farm-name-preview" id="farm-name-preview">Farm Name</h5>
+            </div>
+            <div class="farm-details-preview">
+              <div class="farm-detail">
+                <div class="farm-detail-label">Type</div>
+                <div class="farm-detail-value" id="preview-type">-</div>
+              </div>
+              <div class="farm-detail">
+                <div class="farm-detail-label">Location</div>
+                <div class="farm-detail-value" id="preview-location">-</div>
+              </div>
+              <div class="farm-detail">
+                <div class="farm-detail-label">Owner</div>
+                <div class="farm-detail-value" id="preview-owner">-</div>
+              </div>
+              <div class="farm-detail">
+                <div class="farm-detail-label">Size</div>
+                <div class="farm-detail-value" id="preview-size">-</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-outline" onclick="prevStep(2)">Previous</button>
+            <button type="button" class="btn btn-primary" onclick="completeSignup()">Complete Registration</button>
+          </div>
+        </form>
+
+        <!-- Step 4: Success -->
+        <div class="step-form" id="step-4">
+          <div class="signup-success">
+            <i class="bi bi-check-circle-fill success-icon"></i>
+            <h3>Registration Successful!</h3>
+            <p>Your farm <strong id="success-farm-name">Farm Name</strong> has been registered successfully. You can now access your owner dashboard.</p>
+            <div class="form-actions">
+              <a href="owner-login.html" class="btn btn-outline">Login Later</a>
+              <a href="../owner/index.html" class="btn btn-primary">Go to Dashboard</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Already have account link at bottom -->
+        <div class="text-center mt-4">
+          <p class="mb-0">Already have an account? <a href="owner-login.html" class="text-primary">Login here</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vendor JS Files -->
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Owner Auth JS -->
+  <script src="../assets/js/owner-auth.js"></script>
+
+  <script>
+    // Update success message with actual farm name
+    function updateSuccessMessage() {
+      const farmName = document.getElementById('farm-name').value;
+      if (farmName) {
+        document.getElementById('success-farm-name').textContent = farmName;
+      }
+    }
+
+    // Show existing account alert if account exists
+    function checkExistingAccount() {
+      const ownerData = localStorage.getItem('farmOwnerData');
+      if (ownerData) {
+        const data = JSON.parse(ownerData);
+        // Only show alert if account exists but user is not logged in
+        if (!data.isLoggedIn) {
+          document.getElementById('existing-account-alert').style.display = 'flex !important';
+        }
+      }
+    }
+
+    // Update completeSignup function
+    function completeSignup() {
+      if (ownerAuth.validateStep(3)) {
+        ownerAuth.collectFormData();
+        const savedData = ownerAuth.saveOwnerData();
+        updateSuccessMessage();
+        showStep(4);
+      }
+    }
+
+    // Check for existing account on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      checkExistingAccount();
+    });
+  </script>
+</body>
+</html>

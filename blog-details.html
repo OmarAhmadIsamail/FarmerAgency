@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Blog Details - FarmerAgency</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="assets/css/blog.css" rel="stylesheet">
+</head>
+<body class="index-page">
+  
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <main class="main">
+        <!-- Page Title -->
+        <div class="page-title" data-aos="fade">
+            <div class="heading">
+                <div class="container">
+                    <div class="row d-flex justify-content-center text-center">
+                        <div class="col-lg-8">
+                            <h1 id="blog-detail-title">Blog Details</h1>
+                            <p class="mb-0" id="blog-detail-excerpt">Read our latest article</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <nav class="breadcrumbs">
+                <div class="container">
+                    <ol>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li class="current" id="breadcrumb-current">Article</li>
+                    </ol>
+                </div>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <!-- Blog Details Section -->
+        <section class="blog-details section">
+            <div class="container" data-aos="fade-up">
+                <div class="row">
+                    <!-- Blog Content -->
+                    <div class="col-lg-8">
+                        <article class="blog-detail-content">
+                            <!-- Blog Header -->
+                            <div class="blog-header">
+                                <div class="blog-meta">
+                                    <span class="author" id="blog-author">
+                                        <i class="bi bi-person"></i> By Admin
+                                    </span>
+                                    <span class="date" id="blog-date">
+                                        <i class="bi bi-calendar"></i> January 1, 2024
+                                    </span>
+                                    <span class="category" id="blog-category">
+                                        <i class="bi bi-folder"></i> Uncategorized
+                                    </span>
+                                    <span class="comments" id="blog-comments">
+                                        <i class="bi bi-chat"></i> <span id="comments-count-header">0</span> Comments
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Featured Image -->
+                            <div class="featured-image">
+                                <img id="blog-featured-image" src="" alt="" class="img-fluid">
+                            </div>
+
+                            <!-- Blog Content -->
+                            <div class="blog-content" id="blog-content">
+                                <!-- Content will be loaded dynamically -->
+                            </div>
+
+                            <!-- Blog Footer -->
+                            <div class="blog-footer">
+                                <div class="tags-share">
+                                    <div class="tags">
+                                        <strong>Tags:</strong>
+                                        <div id="blog-tags"></div>
+                                    </div>
+                                    <div class="share">
+                                        <strong>Share:</strong>
+                                        <div class="social-links">
+                                            <a href="#"><i class="bi bi-facebook"></i></a>
+                                            <a href="#"><i class="bi bi-twitter"></i></a>
+                                            <a href="#"><i class="bi bi-linkedin"></i></a>
+                                            <a href="#"><i class="bi bi-pinterest"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Author Bio -->
+                            <div class="author-bio">
+                                <div class="author-avatar">
+                                    <img src="assets/img/blog/author.jpg" alt="Author">
+                                </div>
+                                <div class="author-info">
+                                    <h4>About the Author</h4>
+                                    <p id="author-bio">Farm expert and agricultural enthusiast with over 10 years of experience in sustainable farming practices.</p>
+                                </div>
+                            </div>
+
+                            <!-- Comments Section -->
+                            <div class="comments-section">
+                                <h3>Comments (<span id="comments-count">0</span>)</h3>
+                                <div id="comments-container">
+                                    <!-- Comments will be loaded dynamically -->
+                                </div>
+
+                                <!-- Add Comment Form -->
+                                <div class="add-comment">
+                                    <h4>Leave a Comment</h4>
+                                    <form id="comment-form">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input type="text" id="comment-name" class="form-control" placeholder="Your Name" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="email" id="comment-email" class="form-control" placeholder="Your Email" required>
+                                            </div>
+                                            <div class="col-12">
+                                                <textarea class="form-control" id="comment-text" placeholder="Your Comment" rows="5" required></textarea>
+                                            </div>
+                                            <div class="col-12 mt-3">
+                                                <button type="submit" class="btn btn-primary">Post Comment</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div class="col-lg-4">
+                        <div class="sidebar">
+                            <!-- Search -->
+                            <div class="sidebar-widget">
+                                <h4>Search Blog</h4>
+                                <div class="search-form">
+                                    <input type="text" class="form-control" placeholder="Search articles...">
+                                    <button class="search-btn"><i class="bi bi-search"></i></button>
+                                </div>
+                            </div>
+
+                            <!-- Categories -->
+                            <div class="sidebar-widget">
+                                <h4>Categories</h4>
+                                <ul class="categories-list" id="detail-categories-list">
+                                    <!-- Categories will be loaded dynamically -->
+                                </ul>
+                            </div>
+
+                            <!-- Recent Posts -->
+                            <div class="sidebar-widget">
+                                <h4>Recent Posts</h4>
+                                <div class="recent-posts" id="detail-recent-posts">
+                                    <!-- Recent posts will be loaded dynamically -->
+                                </div>
+                            </div>
+
+                            <!-- Tags -->
+                            <div class="sidebar-widget">
+                                <h4>Popular Tags</h4>
+                                <div class="tags" id="detail-tags-container">
+                                    <!-- Tags will be loaded dynamically -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
+        <i class="bi bi-arrow-up-short"></i>
+    </a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+
+     <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/comments.js"></script>
+    <script src="assets/js/blog-details.js"></script>
+    <script src="assets/js/view-tracker.js"></script>
+</body>
+</html>

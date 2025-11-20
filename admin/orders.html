@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Manage Orders - Admin</title>
+
+  <!-- Fonts and CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/css/admin.css" rel="stylesheet">
+</head>
+
+<body class="admin-body">
+  
+   <!-- Sidebar -->
+   <nav class="admin-sidebar">
+    <div class="sidebar-brand">
+      <h4 class="mb-0">Farm Admin</h4>
+      <small class="text-muted">Dashboard</small>
+    </div>
+    
+    <ul class="sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">
+          <i class="bi bi-speedometer2"></i> Dashboard
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="products.html">
+          <i class="bi bi-box-seam"></i> Products
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="orders.html">
+          <i class="bi bi-cart-check"></i> Orders
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="promo-codes.html">
+          <i class="bi bi-tag"></i> Promo Codes
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="messages.html">
+          <i class="bi bi-envelope"></i> Messages
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="blog.html">
+          <i class="bi bi-journal-text"></i> Blog
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="comments.html">
+          <i class="bi bi-chat-dots"></i> Comments
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="add-blog.html">
+          <i class="bi bi-plus-square"></i> Add Blog Post
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../index.html">
+          <i class="bi bi-house"></i> Back to Site
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- Main Content -->
+  <main class="admin-main">
+    <div class="admin-header">
+      <div class="d-flex justify-content-between align-items-center">
+        <h1 class="h3 mb-0">Manage Orders</h1>
+        <div class="admin-user">
+          <span class="me-2">Welcome, Admin</span>
+          <i class="bi bi-person-circle"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Stats Cards -->
+    <div class="row mt-4" id="order-stats-cards">
+      <!-- Stats will be loaded by JavaScript -->
+    </div>
+
+    <!-- Orders Table -->
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="admin-card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h5 class="card-title mb-0">All Orders</h5>
+              <div class="d-flex gap-3">
+                <select class="form-select" id="order-status-filter" style="width: auto;">
+                  <option value="all">All Status</option>
+                  <option value="pending">Pending</option>
+                  <option value="confirmed">Confirmed</option>
+                  <option value="shipped">Shipped</option>
+                  <option value="delivered">Delivered</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+                <div class="search-box">
+                  <input type="text" class="form-control" placeholder="Search orders..." id="order-search">
+                </div>
+              </div>
+            </div>
+            
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Customer</th>
+                    <th>Email</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Payment</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="orders-table">
+                  <!-- Orders will be loaded here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Vendor JS Files -->
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Admin Orders JS -->
+  <script src="../assets/js/admin-orders.js"></script>
+</body>
+</html>

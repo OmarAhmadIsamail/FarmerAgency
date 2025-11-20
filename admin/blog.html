@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Blog Management - Farm Admin</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Admin CSS -->
+  <link href="../assets/css/admin.css" rel="stylesheet">
+</head>
+
+<body class="admin-body">
+  
+  <!-- Sidebar -->
+  <nav class="admin-sidebar">
+    <div class="sidebar-brand">
+      <h4 class="mb-0">Farm Admin</h4>
+      <small class="text-muted">Dashboard</small>
+    </div>
+    
+    <ul class="sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">
+          <i class="bi bi-speedometer2"></i> Dashboard
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="products.html">
+          <i class="bi bi-box-seam"></i> Products
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="orders.html">
+          <i class="bi bi-cart-check"></i> Orders
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="promo-codes.html">
+          <i class="bi bi-tag"></i> Promo Codes
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="messages.html">
+          <i class="bi bi-envelope"></i> Messages
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="blog.html">
+          <i class="bi bi-journal-text"></i> Blog
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="comments.html">
+          <i class="bi bi-chat-dots"></i> Comments
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="add-blog.html">
+          <i class="bi bi-plus-square"></i> Add Blog Post
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../index.html">
+          <i class="bi bi-house"></i> Back to Site
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="admin-main">
+    <div class="admin-header">
+      <div class="d-flex justify-content-between align-items-center">
+        <h1 class="h3 mb-0">Blog Management</h1>
+        <div class="admin-user">
+          <span class="me-2">Welcome, Admin</span>
+          <i class="bi bi-person-circle"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blog Stats -->
+    <div class="row mt-4">
+      <div class="col-xl-3 col-md-6">
+        <div class="admin-card stats-card">
+          <i class="bi bi-journal-text display-4 text-primary"></i>
+          <span class="stats-number" id="total-posts">0</span>
+          <span class="stats-label">Total Posts</span>
+        </div>
+      </div>
+      <div class="col-xl-3 col-md-6">
+        <div class="admin-card stats-card">
+          <i class="bi bi-chat-dots display-4 text-success"></i>
+          <span class="stats-number" id="total-comments">0</span>
+          <span class="stats-label">Total Comments</span>
+        </div>
+      </div>
+      <div class="col-xl-3 col-md-6">
+        <div class="admin-card stats-card">
+          <i class="bi bi-eye display-4 text-warning"></i>
+          <span class="stats-number" id="total-views">0</span>
+          <span class="stats-label">Total Views</span>
+        </div>
+      </div>
+      <div class="col-xl-3 col-md-6">
+        <div class="admin-card stats-card">
+          <i class="bi bi-folder display-4 text-info"></i>
+          <span class="stats-number" id="total-categories">0</span>
+          <span class="stats-label">Categories</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blog Posts Table -->
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="admin-card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="card-title mb-0">Blog Posts</h5>
+            <div>
+              <a href="comments.html" class="btn btn-info me-2">
+                <i class="bi bi-chat-dots me-2"></i>Manage Comments
+              </a>
+              <a href="add-blog.html" class="btn btn-primary">
+                <i class="bi bi-plus-circle me-2"></i>Add New Post
+              </a>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Author</th>
+                    <th>Date</th>
+                    <th>Views</th>
+                    <th>Comments</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="blog-posts-table">
+                  <!-- Blog posts will be loaded here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Blog Post Modal -->
+    <div class="modal fade" id="editBlogModal" tabindex="-1" aria-labelledby="editBlogModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editBlogModalLabel">Edit Blog Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="edit-blog-form">
+                        <input type="hidden" id="edit-blog-id">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="mb-3">
+                                    <label for="edit-blog-title" class="form-label">Blog Title *</label>
+                                    <input type="text" class="form-control" id="edit-blog-title" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="edit-blog-excerpt" class="form-label">Excerpt *</label>
+                                    <textarea class="form-control" id="edit-blog-excerpt" rows="3" required></textarea>
+                                    <div class="form-text">A short description that will appear on the blog listing page.</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="edit-blog-content" class="form-label">Content *</label>
+                                    <textarea class="form-control" id="edit-blog-content" rows="8" required></textarea>
+                                    <div class="form-text">You can use HTML tags for formatting.</div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="edit-blog-image" class="form-label">Featured Image URL *</label>
+                                    <input type="url" class="form-control" id="edit-blog-image" required>
+                                    <div class="form-text">Enter the URL of the featured image.</div>
+                                    <div class="mt-2">
+                                        <img id="edit-image-preview" src="" alt="Image preview" class="img-thumbnail" style="max-height: 150px; display: none;">
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="edit-blog-category" class="form-label">Category *</label>
+                                    <select class="form-select" id="edit-blog-category" required>
+                                        <option value="">Select Category</option>
+                                        <option value="Sustainable Farming">Sustainable Farming</option>
+                                        <option value="Organic Farming">Organic Farming</option>
+                                        <option value="Urban Farming">Urban Farming</option>
+                                        <option value="Soil Management">Soil Management</option>
+                                        <option value="Agricultural Technology">Agricultural Technology</option>
+                                        <option value="Water Management">Water Management</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="edit-blog-author" class="form-label">Author *</label>
+                                    <input type="text" class="form-control" id="edit-blog-author" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="edit-blog-tags" class="form-label">Tags</label>
+                                    <input type="text" class="form-control" id="edit-blog-tags">
+                                    <div class="form-text">Separate tags with commas (e.g., farming, sustainability, technology)</div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="edit-blog-read-time" class="form-label">Read Time (minutes)</label>
+                                    <input type="number" class="form-control" id="edit-blog-read-time" min="1">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="edit-blog-status" class="form-label">Status</label>
+                                    <select class="form-select" id="edit-blog-status">
+                                        <option value="published">Published</option>
+                                        <option value="draft">Draft</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="update-blog-btn">
+                        <i class="bi bi-check-circle me-2"></i>Update Post
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </main>
+
+  <!-- Vendor JS Files -->
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Admin Blog JS -->
+  <script src="../assets/js/admin-blog.js"></script>
+</body>
+</html>

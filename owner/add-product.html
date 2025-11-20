@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Add Product - Farm Owner</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Owner CSS -->
+  <link href="../assets/css/owner.css" rel="stylesheet">
+</head>
+
+<body class="owner-body">
+  
+  <!-- Sidebar -->
+  <nav class="owner-sidebar">
+    <div class="sidebar-brand">
+      <h4 class="mb-0" id="farm-name">Farm Name</h4>
+      <small class="text-muted">Owner Dashboard</small>
+    </div>
+    
+    <ul class="sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">
+          <i class="bi bi-speedometer2"></i> Dashboard
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="products.html">
+          <i class="bi bi-box-seam"></i> My Products
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="orders.html">
+          <i class="bi bi-cart-check"></i> Farm Orders
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="analytics.html">
+          <i class="bi bi-graph-up"></i> Analytics
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="profile.html">
+          <i class="bi bi-gear"></i> Farm Profile
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../index.html">
+          <i class="bi bi-house"></i> Back to Site
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="owner-main">
+    <div class="owner-header">
+      <div class="d-flex justify-content-between align-items-center">
+        <h1 class="h3 mb-0">Add New Product</h1>
+        <a href="products.html" class="btn btn-outline-secondary">
+          <i class="bi bi-arrow-left me-2"></i>Back to Products
+        </a>
+      </div>
+    </div>
+
+    <!-- Add Product Form -->
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="owner-card">
+          <div class="card-body">
+            <form id="add-owner-product-form" class="owner-form">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label for="product-name">Product Name *</label>
+                    <input type="text" class="form-control" id="product-name" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="product-description">Description *</label>
+                    <textarea class="form-control" id="product-description" rows="4" required></textarea>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="product-category">Category *</label>
+                        <select class="form-select" id="product-category" required>
+                          <option value="">Select Category</option>
+                          <option value="fruit">Fruit</option>
+                          <option value="vegetable">Vegetable</option>
+                          <option value="seed">Seed</option>
+                          <option value="equipment">Equipment</option>
+                          <option value="meat">Meat</option>
+                          <option value="dairy">Dairy</option>
+                          <option value="grains">Grains</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="product-price">Price ($) *</label>
+                        <input type="number" class="form-control" id="product-price" step="0.01" min="0" required>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="product-weight">Weight/Package *</label>
+                        <input type="text" class="form-control" id="product-weight" placeholder="e.g., 1kg, 500g, 50 seeds" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="product-origin">Origin/Farm Location *</label>
+                        <input type="text" class="form-control" id="product-origin" placeholder="e.g., Farm Location" required>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="product-features">Features (one per line)</label>
+                    <textarea class="form-control" id="product-features" rows="3" placeholder="Feature 1&#10;Feature 2&#10;Feature 3"></textarea>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <!-- Multiple Image Upload Section -->
+                  <div class="form-group">
+                    <label class="form-label">Product Images (Max 6) *</label>
+                    <div class="upload-area" id="image-upload-area">
+                      <i class="bi bi-cloud-upload display-4 text-muted d-block mb-2"></i>
+                      <p class="mb-1">Click to upload or drag and drop</p>
+                      <small class="upload-info">PNG, JPG, GIF up to 5MB each</small>
+                      <input type="file" id="product-images" multiple accept="image/*" style="display: none;">
+                    </div>
+                    <div class="image-preview-grid" id="image-preview"></div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="product-stock">Stock Quantity *</label>
+                    <input type="number" class="form-control" id="product-stock" min="0" value="0" required>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="product-organic">
+                      <label class="form-check-label" for="product-organic">
+                        Organic Product
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="product-shelf-life">Shelf Life *</label>
+                    <input type="text" class="form-control" id="product-shelf-life" placeholder="e.g., 2-3 weeks, 1 year" required>
+                  </div>
+
+                  <div class="alert alert-info">
+                    <small>
+                      <i class="bi bi-info-circle me-1"></i>
+                      Your product will be submitted for admin approval before appearing on the main site.
+                    </small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group mt-4">
+                <button type="submit" class="btn btn-primary btn-lg">
+                  <i class="bi bi-plus-circle me-2"></i>Add Product
+                </button>
+                <a href="products.html" class="btn btn-outline-secondary btn-lg ms-2">
+                  Cancel
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Vendor JS Files -->
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Owner JS -->
+  <script src="../assets/js/owner.js"></script>
+  <script src="../assets/js/owner-product.js"></script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Farm Owners Management - Admin Dashboard</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Admin CSS -->
+  <link href="../assets/css/admin.css" rel="stylesheet">
+  <link href="../assets/css/admin-farms.css" rel="stylesheet">
+</head>
+
+<body class="admin-body">
+  
+  <!-- Sidebar -->
+  <nav class="admin-sidebar">
+    <div class="sidebar-brand">
+      <h4 class="mb-0">Farm Admin</h4>
+      <small class="text-muted">Dashboard</small>
+    </div>
+    
+    <ul class="sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">
+          <i class="bi bi-speedometer2"></i> Dashboard
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="products.html">
+          <i class="bi bi-box-seam"></i> Products
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="orders.html">
+          <i class="bi bi-cart-check"></i> Orders
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="farms.html">
+          <i class="bi bi-house"></i> Farm Owners
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="promo-codes.html">
+          <i class="bi bi-tag"></i> Promo Codes
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="messages.html">
+          <i class="bi bi-envelope"></i> Messages
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="blog.html">
+          <i class="bi bi-journal-text"></i> Blog
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="comments.html">
+          <i class="bi bi-chat-dots"></i> Comments
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../index.html">
+          <i class="bi bi-house"></i> Back to Site
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="admin-main">
+    <div class="admin-header">
+      <div class="d-flex justify-content-between align-items-center">
+        <h1 class="h3 mb-0">Farm Owners Management</h1>
+        <div class="d-flex gap-2">
+          <button class="btn btn-outline-primary" id="refresh-farms">
+            <i class="bi bi-arrow-clockwise"></i> Refresh
+          </button>
+          <button class="btn btn-outline-success" id="export-farms">
+            <i class="bi bi-download"></i> Export CSV
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row mt-4">
+      <div class="col-xl-3 col-md-6">
+        <div class="admin-card stats-card">
+          <i class="bi bi-house display-4 text-primary"></i>
+          <span class="stats-number" id="total-farms">0</span>
+          <span class="stats-label">Total Farms</span>
+        </div>
+      </div>
+      <div class="col-xl-3 col-md-6">
+        <div class="admin-card stats-card">
+          <i class="bi bi-currency-dollar display-4 text-success"></i>
+          <span class="stats-number" id="total-revenue">$0</span>
+          <span class="stats-label">Total Revenue</span>
+        </div>
+      </div>
+      <div class="col-xl-3 col-md-6">
+        <div class="admin-card stats-card">
+          <i class="bi bi-wallet display-4 text-warning"></i>
+          <span class="stats-number" id="total-commission">$0</span>
+          <span class="stats-label">Total Commission</span>
+        </div>
+      </div>
+      <div class="col-xl-3 col-md-6">
+        <div class="admin-card stats-card">
+          <i class="bi bi-graph-up display-4 text-info"></i>
+          <span class="stats-number" id="active-farms">0</span>
+          <span class="stats-label">Active Farms</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search and Filters -->
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="admin-card">
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-text"><i class="bi bi-search"></i></span>
+                  <input type="text" class="form-control" id="search-farms" placeholder="Search farms or owners...">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <select class="form-select" id="status-filter">
+                  <option value="">All Status</option>
+                  <option value="active">Active</option>
+                  <option value="pending">Pending</option>
+                  <option value="suspended">Suspended</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <select class="form-select" id="sort-farms">
+                  <option value="newest">Newest First</option>
+                  <option value="oldest">Oldest First</option>
+                  <option value="revenue-high">Revenue: High to Low</option>
+                  <option value="revenue-low">Revenue: Low to High</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Farms Table -->
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="admin-card">
+          <div class="card-body">
+            <h5 class="card-title">All Farm Owners</h5>
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Farm</th>
+                    <th>Owner</th>
+                    <th>Contact</th>
+                    <th>Revenue</th>
+                    <th>Commission</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="farms-table-body">
+                  <!-- Farms will be loaded here -->
+                </tbody>
+              </table>
+            </div>
+            
+            <!-- Pagination -->
+            <nav aria-label="Farm owners pagination">
+              <ul class="pagination justify-content-center" id="farms-pagination">
+                <!-- Pagination will be generated here -->
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Farm Details Modal -->
+  <div class="modal fade" id="farmDetailsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Farm Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="farm-details-content">
+          <!-- Details will be loaded here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vendor JS Files -->
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Admin Farms JS -->
+  <script src="../assets/js/admin-farms.js"></script>
+</body>
+</html>

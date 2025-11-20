@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Farm Profile - FarmAgency</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Owner CSS -->
+  <link href="../assets/css/owner.css" rel="stylesheet">
+</head>
+
+<body class="owner-body">
+  
+  <!-- Sidebar -->
+  <nav class="owner-sidebar">
+    <div class="sidebar-brand">
+      <h4 class="mb-0" id="farm-name">Farm Name</h4>
+      <small class="text-muted">Owner Dashboard</small>
+    </div>
+    
+    <ul class="sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">
+          <i class="bi bi-speedometer2"></i> Dashboard
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="products.html">
+          <i class="bi bi-box-seam"></i> My Products
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="orders.html">
+          <i class="bi bi-cart-check"></i> Farm Orders
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="analytics.html">
+          <i class="bi bi-graph-up"></i> Analytics
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="profile.html">
+          <i class="bi bi-gear"></i> Farm Profile
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../index.html">
+          <i class="bi bi-house"></i> Back to Site
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="owner-main">
+    <div class="owner-header">
+      <div class="d-flex justify-content-between align-items-center">
+        <h1 class="h3 mb-0">Farm Profile</h1>
+        <div class="owner-user">
+          <span class="me-2">Welcome, <span id="owner-name">Owner</span></span>
+          <span class="farm-badge">
+            <i class="bi bi-tree-fill"></i>
+            <span id="display-farm-name">Farm Name</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Management -->
+    <div class="row mt-4">
+      <div class="col-lg-4">
+        <!-- Farm Avatar Card -->
+        <div class="owner-card mb-4">
+          <div class="card-body text-center">
+            <div class="farm-avatar-container mb-3">
+              <img src="" alt="Farm Avatar" class="farm-avatar" id="farm-avatar-preview">
+              <div class="avatar-overlay">
+                <i class="bi bi-camera-fill"></i>
+              </div>
+              <input type="file" id="farm-avatar-input" accept="image/*" class="d-none">
+            </div>
+            <h5 id="profile-farm-name">Farm Name</h5>
+            <p class="text-muted" id="profile-farm-type">Farm Type</p>
+            <button class="btn btn-outline-primary btn-sm" id="change-avatar-btn">
+              <i class="bi bi-camera"></i> Change Avatar
+            </button>
+          </div>
+        </div>
+
+        <!-- Account Status Card -->
+        <div class="owner-card">
+          <div class="card-body">
+            <h6 class="card-title">Account Status</h6>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span>Registration Date:</span>
+              <strong id="registration-date">-</strong>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span>Account Status:</span>
+              <span class="badge bg-success" id="account-status">Active</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <span>Last Updated:</span>
+              <strong id="last-updated">-</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-8">
+        <!-- Profile Tabs -->
+        <div class="owner-card">
+          <div class="card-body">
+            <ul class="nav nav-tabs" id="profileTabs" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="farm-tab" data-bs-toggle="tab" data-bs-target="#farm" type="button" role="tab">
+                  <i class="bi bi-house-door"></i> Farm Information
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="owner-tab" data-bs-toggle="tab" data-bs-target="#owner" type="button" role="tab">
+                  <i class="bi bi-person"></i> Owner Details
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="business-tab" data-bs-toggle="tab" data-bs-target="#business" type="button" role="tab">
+                  <i class="bi bi-briefcase"></i> Business Info
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="security-tab" data-bs-toggle="tab" data-bs-target="#security" type="button" role="tab">
+                  <i class="bi bi-shield-lock"></i> Security
+                </button>
+              </li>
+            </ul>
+
+            <div class="tab-content mt-4" id="profileTabsContent">
+              <!-- Farm Information Tab -->
+              <div class="tab-pane fade show active" id="farm" role="tabpanel">
+                <form id="farm-form">
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="farm-name-input" class="form-label">Farm Name *</label>
+                      <input type="text" class="form-control" id="farm-name-input" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="farm-type-select" class="form-label">Farm Type *</label>
+                      <select class="form-select" id="farm-type-select" required>
+                        <option value="">Select Farm Type</option>
+                        <option value="crop">Crop Farm</option>
+                        <option value="livestock">Livestock Farm</option>
+                        <option value="dairy">Dairy Farm</option>
+                        <option value="poultry">Poultry Farm</option>
+                        <option value="mixed">Mixed Farming</option>
+                        <option value="organic">Organic Farm</option>
+                        <option value="hydroponic">Hydroponic Farm</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="farm-location-input" class="form-label">Location *</label>
+                      <input type="text" class="form-control" id="farm-location-input" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="farm-size-input" class="form-label">Farm Size (acres)</label>
+                      <input type="number" class="form-control" id="farm-size-input" min="0" step="0.1">
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="farm-description-textarea" class="form-label">Farm Description</label>
+                    <textarea class="form-control" id="farm-description-textarea" rows="4" placeholder="Tell customers about your farm..."></textarea>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Products You Offer</label>
+                    <div class="row">
+                      <div class="col-md-4 mb-2">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="product-fruits">
+                          <label class="form-check-label" for="product-fruits">Fruits</label>
+                        </div>
+                      </div>
+                      <div class="col-md-4 mb-2">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="product-vegetables">
+                          <label class="form-check-label" for="product-vegetables">Vegetables</label>
+                        </div>
+                      </div>
+                      <div class="col-md-4 mb-2">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="product-dairy">
+                          <label class="form-check-label" for="product-dairy">Dairy</label>
+                        </div>
+                      </div>
+                      <div class="col-md-4 mb-2">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="product-meat">
+                          <label class="form-check-label" for="product-meat">Meat</label>
+                        </div>
+                      </div>
+                      <div class="col-md-4 mb-2">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="product-eggs">
+                          <label class="form-check-label" for="product-eggs">Eggs</label>
+                        </div>
+                      </div>
+                      <div class="col-md-4 mb-2">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="product-other">
+                          <label class="form-check-label" for="product-other">Other</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="text-end">
+                    <button type="submit" class="btn btn-primary">
+                      <i class="bi bi-check-lg"></i> Update Farm Information
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <!-- Owner Details Tab -->
+              <div class="tab-pane fade" id="owner" role="tabpanel">
+                <form id="owner-form">
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="first-name-input" class="form-label">First Name *</label>
+                      <input type="text" class="form-control" id="first-name-input" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="last-name-input" class="form-label">Last Name *</label>
+                      <input type="text" class="form-control" id="last-name-input" required>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="email-input" class="form-label">Email Address *</label>
+                      <input type="email" class="form-control" id="email-input" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="phone-input" class="form-label">Phone Number *</label>
+                      <input type="tel" class="form-control" id="phone-input" required>
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="address-input" class="form-label">Address</label>
+                    <input type="text" class="form-control" id="address-input">
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="city-input" class="form-label">City</label>
+                      <input type="text" class="form-control" id="city-input">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="state-input" class="form-label">State/Province</label>
+                      <input type="text" class="form-control" id="state-input">
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="zip-input" class="form-label">ZIP/Postal Code</label>
+                      <input type="text" class="form-control" id="zip-input">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="country-input" class="form-label">Country</label>
+                      <input type="text" class="form-control" id="country-input">
+                    </div>
+                  </div>
+
+                  <div class="text-end">
+                    <button type="submit" class="btn btn-primary">
+                      <i class="bi bi-check-lg"></i> Update Owner Details
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <!-- Business Information Tab -->
+              <div class="tab-pane fade" id="business" role="tabpanel">
+                <form id="business-form">
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="business-license-input" class="form-label">Business License Number</label>
+                      <input type="text" class="form-control" id="business-license-input">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="tax-id-input" class="form-label">Tax ID</label>
+                      <input type="text" class="form-control" id="tax-id-input">
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="bank-account-input" class="form-label">Bank Account Number</label>
+                    <input type="text" class="form-control" id="bank-account-input">
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="business-description-textarea" class="form-label">Business Description</label>
+                    <textarea class="form-control" id="business-description-textarea" rows="4" placeholder="Describe your business operations..."></textarea>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Business Hours</label>
+                    <div class="row">
+                      <div class="col-md-6 mb-2">
+                        <label for="opening-time" class="form-label">Opening Time</label>
+                        <input type="time" class="form-control" id="opening-time">
+                      </div>
+                      <div class="col-md-6 mb-2">
+                        <label for="closing-time" class="form-label">Closing Time</label>
+                        <input type="time" class="form-control" id="closing-time">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="text-end">
+                    <button type="submit" class="btn btn-primary">
+                      <i class="bi bi-check-lg"></i> Update Business Info
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <!-- Security Tab -->
+              <div class="tab-pane fade" id="security" role="tabpanel">
+                <form id="password-form">
+                  <div class="mb-3">
+                    <label for="current-password-input" class="form-label">Current Password *</label>
+                    <input type="password" class="form-control" id="current-password-input" required>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6 mb-3">
+                      <label for="new-password-input" class="form-label">New Password *</label>
+                      <input type="password" class="form-control" id="new-password-input" required>
+                      <div class="form-text">Password must be at least 8 characters long</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="confirm-password-input" class="form-label">Confirm New Password *</label>
+                      <input type="password" class="form-control" id="confirm-password-input" required>
+                    </div>
+                  </div>
+
+                  <div class="text-end">
+                    <button type="submit" class="btn btn-primary">
+                      <i class="bi bi-key"></i> Change Password
+                    </button>
+                  </div>
+                </form>
+
+                <hr class="my-4">
+
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h6 class="mb-1">Account Deletion</h6>
+                    <p class="text-muted mb-0">Permanently delete your account and all associated data</p>
+                  </div>
+                  <button class="btn btn-outline-danger" id="delete-account-btn">
+                    <i class="bi bi-trash"></i> Delete Account
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Vendor JS Files -->
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Owner JS -->
+  <script src="../assets/js/owner.js"></script>
+  <script src="../assets/js/owner-profile.js"></script>
+</body>
+</html>

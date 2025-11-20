@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Owner Login - FarmAgency</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Owner Auth CSS -->
+  <link href="../assets/css/owner-auth.css" rel="stylesheet">
+</head>
+
+<body class="owner-auth-body">
+  <div class="owner-auth-container">
+    <div class="owner-auth-card">
+      <div class="owner-auth-header">
+        <h1>Farm Owner Login</h1>
+        <p>Access your farm dashboard</p>
+      </div>
+
+      <div class="owner-auth-body-content">
+        <!-- Welcome back message if account exists -->
+        <div class="alert alert-info d-flex align-items-center mb-4" id="welcome-back-alert" style="display: none !important;">
+          <i class="bi bi-house-check me-2"></i>
+          <div>Welcome back! Please login to access your farm dashboard.</div>
+        </div>
+
+        <form id="owner-login-form">
+          <div class="form-group">
+            <label for="login-email" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="login-email" required placeholder="Enter your email">
+          </div>
+
+          <div class="form-group">
+            <label for="login-password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="login-password" required placeholder="Enter your password">
+            <div class="form-text">
+              <a href="#" class="text-muted">Forgot your password?</a>
+            </div>
+          </div>
+
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="remember-me">
+            <label class="form-check-label" for="remember-me">Remember me</label>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 mb-3">
+            <i class="bi bi-box-arrow-in-right me-2"></i>
+            Login to Dashboard
+          </button>
+
+          <div class="text-center">
+            <p class="mb-0">Don't have an account? <a href="owner-signup.html" class="text-primary">Register your farm</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vendor JS Files -->
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    // Show welcome back message if account exists
+    function showWelcomeBack() {
+      const ownerData = localStorage.getItem('farmOwnerData');
+      if (ownerData) {
+        const data = JSON.parse(ownerData);
+        // Pre-fill email if available
+        document.getElementById('login-email').value = data.owner.email || '';
+        document.getElementById('welcome-back-alert').style.display = 'flex !important';
+      }
+    }
+
+    document.getElementById('owner-login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      
+      // Check if owner data exists
+      const ownerData = localStorage.getItem('farmOwnerData');
+      if (ownerData) {
+        const data = JSON.parse(ownerData);
+        
+        // Simple validation (in real app, use proper authentication)
+        if (data.owner.email === email && data.owner.password === password) {
+          data.isLoggedIn = true;
+          localStorage.setItem('farmOwnerData', JSON.stringify(data));
+          window.location.href = '../owner/index.html';
+        } else {
+          alert('Invalid email or password. Please try again.');
+        }
+      } else {
+        alert('No farm owner account found. Please register first.');
+        window.location.href = 'owner-signup.html';
+      }
+    });
+
+    // Redirect to dashboard if already logged in
+    document.addEventListener('DOMContentLoaded', function() {
+      const ownerData = localStorage.getItem('farmOwnerData');
+      if (ownerData) {
+        const data = JSON.parse(ownerData);
+        if (data.isLoggedIn) {
+          window.location.href = '../owner/index.html';
+        } else {
+          showWelcomeBack();
+        }
+      }
+    });
+  </script>
+</body>
+</html>

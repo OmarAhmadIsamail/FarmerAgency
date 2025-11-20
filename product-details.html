@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Product Details - FarmFresh</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+</head>
+
+<body class="index-page">
+  
+  <!-- Header will be loaded here -->
+  <div id="header-container"></div>
+
+  <main class="main">
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade">
+      <div class="heading">
+        <div class="container">
+          <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-8">
+              <h1 id="product-title">Product Description</h1>
+              <p class="mb-0" id="product-short-desc">Fresh organic products directly from our farm to your table.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="breadcrumbs">
+        <div class="container">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="product.html">Market</a></li>
+            <li class="current" id="breadcrumb-product">Product Details</li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <!-- Product Details Section -->
+    <section id="product-details" class="product-details section">
+      <div class="container" data-aos="fade-up">
+        <div class="product-details-slider swiper init-swiper">
+          <script type="application/json" class="swiper-config">
+            {
+              "loop": true,
+              "speed": 600,
+              "autoplay": {
+                "delay": 5000
+              },
+              "slidesPerView": "auto",
+              "navigation": {
+                "nextEl": ".swiper-button-next",
+                "prevEl": ".swiper-button-prev"
+              },
+              "pagination": {
+                "el": ".swiper-pagination",
+                "type": "bullets",
+                "clickable": true
+              }
+            }
+          </script>
+          <div class="swiper-wrapper align-items-center">
+            <!-- Product images will be dynamically loaded -->
+          </div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+        <div class="row justify-content-between gy-4 mt-4">
+          <div class="col-lg-8" data-aos="fade-up">
+            <div class="product-description">
+              <h2 id="product-name">Product Name</h2>
+              <div class="product-meta mb-3">
+                <span class="product-category badge bg-success me-2" id="product-category">Category</span>
+                <span class="product-price h4 text-accent" id="product-price">$0.00</span>
+              </div>
+              
+              <p id="product-description-full">
+                Product description will be loaded here...
+              </p>
+
+              <div class="product-features mb-4">
+                <h4>Product Features</h4>
+                <ul id="product-features-list">
+                  <!-- Features will be dynamically loaded -->
+                </ul>
+              </div>
+
+              <!-- Quantity and Add to Cart Section -->
+              <div class="add-to-cart-section">
+                <div class="row align-items-center">
+                  <div class="col-md-6">
+                    <div class="quantity-selector">
+                      <label for="quantity" class="form-label">Quantity:</label>
+                      <div class="input-group" style="max-width: 150px;">
+                        <button class="btn btn-outline-secondary quantity-minus" type="button">-</button>
+                        <input type="number" class="form-control text-center quantity-input" id="quantity" value="1" min="1" max="100">
+                        <button class="btn btn-outline-secondary quantity-plus" type="button">+</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <button class="btn btn-primary btn-lg w-100 add-to-cart-single" id="add-to-cart-btn">
+                      <i class="bi bi-cart-plus me-2"></i>Add to Cart
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tabs -->
+              <ul class="nav nav-pills mb-3 mt-5">
+                <li><a class="nav-link active" data-bs-toggle="pill" href="#product-tab1">Product Details</a></li>
+                <li><a class="nav-link" data-bs-toggle="pill" href="#product-tab2">Nutrition Info</a></li>
+                <li><a class="nav-link" data-bs-toggle="pill" href="#product-tab3">Storage Tips</a></li>
+              </ul>
+
+              <!-- Tab Content -->
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="product-tab1">
+                  <div id="product-details-content">
+                    <!-- Product details will be loaded here -->
+                  </div>
+                </div>
+
+                <div class="tab-pane fade" id="product-tab2">
+                  <div id="nutrition-info-content">
+                    <!-- Nutrition information will be loaded here -->
+                  </div>
+                </div>
+
+                <div class="tab-pane fade" id="product-tab3">
+                  <div id="storage-tips-content">
+                    <!-- Storage tips will be loaded here -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3" data-aos="fade-up" data-aos-delay="100">
+            <div class="product-info">
+              <h3>Quick Summary</h3>
+              <ul>
+                <li><strong>Product ID:</strong> <span id="product-id">-</span></li>
+                <li><strong>Category:</strong> <span id="product-category-summary">-</span></li>
+                <li><strong>Availability:</strong> <span id="product-availability" class="text-success">In Stock</span></li>
+                <li><strong>Weight:</strong> <span id="product-weight">-</span></li>
+                <li><strong>Origin:</strong> <span id="product-origin">-</span></li>
+                <li><strong>Shelf Life:</strong> <span id="product-shelf-life">-</span></li>
+                <li><strong>Organic:</strong> <span id="product-organic">Yes</span></li>
+              </ul>
+              
+              <div class="delivery-info mt-4">
+                <h5>Delivery Info</h5>
+                <p class="small mb-1"><i class="bi bi-truck me-2"></i>Free delivery on orders over $50</p>
+                <p class="small mb-1"><i class="bi bi-clock me-2"></i>Same day delivery available</p>
+                <p class="small mb-0"><i class="bi bi-shield-check me-2"></i>Freshness guaranteed</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Cart Notification -->
+  <div class="cart-notification" id="cart-notification">
+    <i class="bi bi-check-circle-fill"></i>
+    <span class="notification-text"></span>
+  </div>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Component Loader Script -->
+  <script src="assets/js/components.js"></script>
+  
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+
+  <!-- Cart Manager - ADD THIS LINE -->
+  <script src="assets/js/cart-manager.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+  
+  <!-- Product Details JS -->
+  <script src="assets/js/product-details.js"></script>
+</body>
+</html>

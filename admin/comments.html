@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Comment Management - Farm Admin</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Admin CSS -->
+  <link href="../assets/css/admin.css" rel="stylesheet">
+</head>
+
+<body class="admin-body">
+  
+  <!-- Sidebar -->
+  <nav class="admin-sidebar">
+    <div class="sidebar-brand">
+      <h4 class="mb-0">Farm Admin</h4>
+      <small class="text-muted">Dashboard</small>
+    </div>
+    
+    <ul class="sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">
+          <i class="bi bi-speedometer2"></i> Dashboard
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="products.html">
+          <i class="bi bi-box-seam"></i> Products
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="orders.html">
+          <i class="bi bi-cart-check"></i> Orders
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="promo-codes.html">
+          <i class="bi bi-tag"></i> Promo Codes
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="messages.html">
+          <i class="bi bi-envelope"></i> Messages
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="blog.html">
+          <i class="bi bi-journal-text"></i> Blog
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="comments.html">
+          <i class="bi bi-chat-dots"></i> Comments
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="add-blog.html">
+          <i class="bi bi-plus-square"></i> Add Blog Post
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../index.html">
+          <i class="bi bi-house"></i> Back to Site
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="admin-main">
+    <div class="admin-header">
+      <div class="d-flex justify-content-between align-items-center">
+        <h1 class="h3 mb-0">Comment Management</h1>
+        <div class="admin-user">
+          <span class="me-2">Welcome, Admin</span>
+          <i class="bi bi-person-circle"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comment Stats -->
+    <div class="row mt-4">
+      <div class="col-xl-3 col-md-6">
+        <div class="admin-card stats-card">
+          <i class="bi bi-chat-dots display-4 text-primary"></i>
+          <span class="stats-number" id="total-comments">0</span>
+          <span class="stats-label">Total Comments</span>
+        </div>
+      </div>
+      <div class="col-xl-3 col-md-6">
+        <div class="admin-card stats-card">
+          <i class="bi bi-check-circle display-4 text-success"></i>
+          <span class="stats-number" id="approved-comments">0</span>
+          <span class="stats-label">Approved</span>
+        </div>
+      </div>
+    
+    <div class="col-xl-3 col-md-6">
+         <div class="admin-card stats-card">
+        <i class="bi bi-shield-exclamation display-4 text-warning"></i>
+        <span class="stats-number" id="pending-comments">0</span>
+        <span class="stats-label">Spam Comments</span>
+    </div>
+   </div>
+      <div class="col-xl-3 col-md-6">
+        <div class="admin-card stats-card">
+          <i class="bi bi-reply display-4 text-info"></i>
+          <span class="stats-number" id="total-replies">0</span>
+          <span class="stats-label">Admin Replies</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comments Filter -->
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="admin-card">
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-md-4">
+                <label class="form-label">Filter by Status</label>
+                <select class="form-select" id="status-filter">
+                  <option value="all">All Comments</option>
+                  <option value="approved">Approved</option>
+                  <option value="pending">Pending</option>
+                  <option value="spam">Spam</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Filter by Post</label>
+                <select class="form-select" id="post-filter">
+                  <option value="all">All Posts</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Search</label>
+                <input type="text" class="form-control" id="comment-search" placeholder="Search comments...">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comments Table -->
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="admin-card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="card-title mb-0">All Comments</h5>
+            <div class="btn-group">
+              <button class="btn btn-outline-danger" id="delete-selected">
+                <i class="bi bi-trash me-2"></i>Delete Selected
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th width="50">
+                      <input type="checkbox" id="select-all">
+                    </th>
+                    <th>Comment</th>
+                    <th>user</th>
+                    <th>Post</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="comments-table">
+                  <!-- Comments will be loaded here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Vendor JS Files -->
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Admin Comments JS -->
+  <script src="../assets/js/admin-comments.js"></script>
+</body>
+</html>
