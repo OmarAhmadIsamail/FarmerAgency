@@ -134,8 +134,9 @@ class ProductDisplay {
 
     createProductCard(product) {
         const col = document.createElement('div');
-        col.className = 'product-item';
+        col.className = 'col-xl-3 col-lg-4 col-md-6 product-item';
         col.setAttribute('data-aos', 'fade-up');
+        col.setAttribute('data-aos-duration', '600');
         col.setAttribute('data-category', product.category);
     
         // Use first image for product listing
@@ -206,24 +207,45 @@ class ProductDisplay {
 
     applyFilter(filter) {
         this.currentFilter = filter;
-        const products = document.querySelectorAll('.products-container .col-xl-3');
+        const products = document.querySelectorAll('.products-container .product-item');
 
-        products.forEach(product => {
-            if (filter === 'all' || product.getAttribute('data-category') === filter) {
-                product.style.display = 'block';
-            } else {
-                product.style.display = 'none';
-            }
+        products.forEach((product, index) => {
+            const category = product.getAttribute('data-category');
+            
+            // Add delay for staggered animation
+            const delay = index * 50;
+            
+            setTimeout(() => {
+                if (filter === 'all' || category === filter) {
+                    product.style.display = 'block';
+                    // Trigger reflow for animation
+                    void product.offsetWidth;
+                    product.style.opacity = '1';
+                    product.style.transform = 'translateY(0)';
+                } else {
+                    // Fade out and slide up animation
+                    product.style.opacity = '0';
+                    product.style.transform = 'translateY(20px)';
+                    
+                    // Hide after animation completes
+                    setTimeout(() => {
+                        product.style.display = 'none';
+                    }, 300);
+                }
+            }, delay);
         });
 
-        this.checkNoProducts();
+        // Check for no products after animation completes
+        setTimeout(() => {
+            this.checkNoProducts();
+        }, products.length * 50 + 350);
     }
 
     searchProducts(searchTerm) {
-        const products = document.querySelectorAll('.products-container .col-xl-3');
+        const products = document.querySelectorAll('.products-container .product-item');
         let visibleCount = 0;
 
-        products.forEach(product => {
+        products.forEach((product, index) => {
             const title = product.querySelector('h3 a').textContent.toLowerCase();
             const category = product.getAttribute('data-category');
             
@@ -232,24 +254,48 @@ class ProductDisplay {
             const matchesFilter = this.currentFilter === 'all' || 
                                 product.getAttribute('data-category') === this.currentFilter;
 
-            if (matchesSearch && matchesFilter) {
-                product.style.display = 'block';
-                visibleCount++;
-            } else {
-                product.style.display = 'none';
-            }
+            // Add delay for staggered animation
+            const delay = index * 30;
+            
+            setTimeout(() => {
+                if (matchesSearch && matchesFilter) {
+                    product.style.display = 'block';
+                    // Trigger reflow for animation
+                    void product.offsetWidth;
+                    product.style.opacity = '1';
+                    product.style.transform = 'translateY(0)';
+                    visibleCount++;
+                } else {
+                    // Fade out and slide up animation
+                    product.style.opacity = '0';
+                    product.style.transform = 'translateY(20px)';
+                    
+                    // Hide after animation completes
+                    setTimeout(() => {
+                        product.style.display = 'none';
+                    }, 300);
+                }
+            }, delay);
         });
 
-        this.checkNoProducts();
+        // Check for no products after animation completes
+        setTimeout(() => {
+            this.checkNoProducts();
+        }, products.length * 30 + 350);
     }
 
     checkNoProducts() {
         const noProducts = document.getElementById('no-products');
-        const visibleProducts = document.querySelectorAll('.products-container .col-xl-3[style="display: block"]');
+        const visibleProducts = document.querySelectorAll('.products-container .product-item[style="display: block"]');
         
         if (noProducts) {
             if (visibleProducts.length === 0) {
                 noProducts.classList.remove('d-none');
+                // Add fade in animation for no products message
+                setTimeout(() => {
+                    noProducts.style.opacity = '1';
+                    noProducts.style.transform = 'translateY(0)';
+                }, 50);
             } else {
                 noProducts.classList.add('d-none');
             }
